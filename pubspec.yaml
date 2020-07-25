@@ -33,14 +33,16 @@ dependencies:
   # App Services
   stacked_services: ^0.4.8
   # Functional Programming Thingies
-  equatable: ^1.2.2
   dartz: ^0.9.1
+  # Data Equality
+  equatable: ^1.2.2
   # Dependency Injection
   get_it: ^4.0.4
   # Navigation
   auto_route: ^0.6.6
   # Platform Specific UI
-  native_widgets: ^1.3.7+1
+  flutter_platform_widgets: ^0.51.0
+  
   
   
   

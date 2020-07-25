@@ -33,6 +33,7 @@ dependencies:
   # App Services
   stacked_services: ^0.4.8
   # Functional Programming Thingies
+  equatable: ^1.2.2
   dartz: ^0.9.1
   # Dependency Injection
   get_it: ^4.0.4
@@ -40,6 +41,7 @@ dependencies:
   auto_route: ^0.6.6
   # Platform Specific UI
   native_widgets: ^1.3.7+1
+  
   
   
   

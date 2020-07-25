@@ -16,7 +16,7 @@ class SplashView extends StatelessWidget {
               height: ScreenUtil(context).setHeight(),
               width: ScreenUtil(context).setWidth(),
               child: Center(
-                child: Text('SplashS'),
+                child: Text(model.text),
               ),
             ),
           );

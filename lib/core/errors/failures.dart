@@ -3,7 +3,8 @@ import 'package:meta/meta.dart';
 
 // This class handles failures that tends to occur during application process
 abstract class Failure extends Equatable {
-  Failure([List props = const <dynamic>[]]) : super();
+  @override
+  List<Object> get props => [];
 }
 
 // Handles all server error messages

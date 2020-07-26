@@ -1,5 +1,6 @@
-import 'package:get_weather/features/home/domain/entities/open_weather_one_call.dart';
 import 'package:meta/meta.dart';
+
+import '../../domain/entities/open_weather_one_call.dart';
 
 class OpenWeatherOneCallModel extends OpenWeatherOneCall {
   OpenWeatherOneCallModel({

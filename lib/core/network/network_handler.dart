@@ -1,10 +1,10 @@
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
-abstract class AppHttpClient<Type> {
-  Future<Type> getOne(String url,
+abstract class AppHttpClient {
+  Future<dynamic> getOne(String url,
       {Map<String, String> body, Map<String, String> headers});
-  Future<Type> getCity(String url,
+  Future<dynamic> getCity(String url,
       {Map<String, String> body, Map<String, String> headers});
 }
 

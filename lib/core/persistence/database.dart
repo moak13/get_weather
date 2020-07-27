@@ -3,8 +3,8 @@ import 'package:meta/meta.dart';
 
 // This is a contract database class
 abstract class Database {
-  Future<void> save({String key, String value});
-  Future<String> pull({String key});
+  Future<void> save({@required String key, @required String value});
+  Future<String> pull({@required String key});
 }
 
 class DatabaseImpl implements Database {

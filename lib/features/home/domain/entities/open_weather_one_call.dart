@@ -30,7 +30,7 @@ class OpenWeatherCurrent extends Equatable {
   final double visibility;
   final double windSpeed;
   final double windDeg;
-  final OpenWeatherDescription weather;
+  final List<OpenWeatherDescription> weather;
   OpenWeatherCurrent({
     @required this.dt,
     @required this.sunrise,

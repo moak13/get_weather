@@ -1,3 +1,4 @@
+import 'package:dartz/dartz_unsafe.dart';
 import 'package:meta/meta.dart';
 
 import '../../domain/entities/open_weather_one_call.dart';
@@ -51,7 +52,7 @@ class OpenWeatherCurrentModel extends OpenWeatherCurrent {
     @required double visibility,
     @required double windSpeed,
     @required double windDeg,
-    @required OpenWeatherDescription weather,
+    @required List<OpenWeatherDescription> weather,
   }) : super(
           dt: dt,
           sunrise: sunrise,
@@ -71,23 +72,24 @@ class OpenWeatherCurrentModel extends OpenWeatherCurrent {
 
   factory OpenWeatherCurrentModel.fromJson(Map<String, dynamic> json) {
     return OpenWeatherCurrentModel(
-      dt: json['dt'],
-      sunrise: json['sunrise'],
-      sunset: json['sunset'],
-      temp: json['temp'],
-      feelsLike: json['feels_like'],
-      pressure: json['pressure'],
-      humidity: json['humidity'],
-      dewPoint: json['dew_point'],
-      uvi: json['uvi'],
-      clouds: json['clouds'],
-      visibility: json['visibility'],
-      windSpeed: json['wind_speed'],
-      windDeg: json['wind_deg'],
-      weather: json['weather'] == null
-          ? null
-          : OpenWeatherDescriptionModel.fromJson(json['weather']),
-    );
+        dt: json['dt'],
+        sunrise: json['sunrise'],
+        sunset: json['sunset'],
+        temp: json['temp'],
+        feelsLike: json['feels_like'],
+        pressure: json['pressure'],
+        humidity: json['humidity'],
+        dewPoint: json['dew_point'],
+        uvi: json['uvi'],
+        clouds: json['clouds'],
+        visibility: json['visibility'],
+        windSpeed: json['wind_speed'],
+        windDeg: json['wind_deg'],
+        weather: json['weather'] != null
+            ? json['weather'].forEach((v) {
+                new OpenWeatherDescriptionModel.fromJson(v);
+              })
+            : null);
   }
 
   Map<String, dynamic> toJson() {

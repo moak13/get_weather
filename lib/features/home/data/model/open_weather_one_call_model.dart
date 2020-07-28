@@ -1,4 +1,3 @@
-import 'package:dartz/dartz_unsafe.dart';
 import 'package:meta/meta.dart';
 
 import '../../domain/entities/open_weather_one_call.dart';

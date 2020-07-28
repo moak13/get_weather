@@ -14,7 +14,7 @@ class GetLocationWeather implements UseCase<OpenWeatherLocation, Params> {
   });
   @override
   Future<Either<Failure, OpenWeatherLocation>> call(Params params) async {
-    return await repository.getLocationWeather(cityNmae: params.cityName);
+    return await repository.getLocationWeather(cityName: params.cityName);
   }
 }
 

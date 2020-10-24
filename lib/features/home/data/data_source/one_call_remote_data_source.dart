@@ -1,9 +1,8 @@
 import 'dart:convert';
 
-import 'package:meta/meta.dart';
-
 import '../../../../core/errors/exceptions.dart';
 import '../../../../core/network/network_handler.dart';
+import '../../../../locator.dart';
 import '../model/open_weather_one_call_model.dart';
 
 abstract class OneCallRemoteDataSource {
@@ -14,9 +13,7 @@ abstract class OneCallRemoteDataSource {
 }
 
 class OneCallRemoteDataSourceImpl implements OneCallRemoteDataSource {
-  final AppHttpClient client;
-
-  OneCallRemoteDataSourceImpl({@required this.client});
+  AppHttpClient client = locator<AppHttpClient>();
   @override
   Future<OpenWeatherOneCallModel> getOneCall() async {
     final String url = "https://api.openweathermap.org/data/2.5/onecall";

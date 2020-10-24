@@ -1,5 +1,6 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:meta/meta.dart';
+
+import '../../locator.dart';
 
 // This class holds the return value of internet connection in boolean
 abstract class NetworkInfo {
@@ -8,8 +9,8 @@ abstract class NetworkInfo {
 
 // This implementation tends to check of the user device is online or not
 class NetworkInfoImpl implements NetworkInfo {
-  final DataConnectionChecker connectionChecker;
-  NetworkInfoImpl({@required this.connectionChecker});
+  final DataConnectionChecker connectionChecker =
+      locator<DataConnectionChecker>();
   @override
   Future<bool> get isConnected => connectionChecker.hasConnection;
 }

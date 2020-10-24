@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:meta/meta.dart';
 
 import '../../domain/entities/open_weather_one_call.dart';
@@ -7,7 +9,7 @@ class OpenWeatherOneCallModel extends OpenWeatherOneCall {
     @required double lat,
     @required double lon,
     @required String timezone,
-    @required OpenWeatherCurrent current,
+    @required OpenWeatherCurrentModel current,
   }) : super(
           lat: lat,
           lon: lon,
@@ -15,25 +17,30 @@ class OpenWeatherOneCallModel extends OpenWeatherOneCall {
           current: current,
         );
 
-  factory OpenWeatherOneCallModel.fromJson(Map<String, dynamic> json) {
-    return OpenWeatherOneCallModel(
-      lat: json['lat'],
-      lon: json['lon'],
-      timezone: json['timezone'],
-      current: json['current'] == null
-          ? null
-          : OpenWeatherCurrentModel.fromJson(json['current']),
-    );
-  }
-
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
       'lat': lat,
       'lon': lon,
       'timezone': timezone,
-      'current': current,
+      'current': current?.toMap(),
     };
   }
+
+  factory OpenWeatherOneCallModel.fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+
+    return OpenWeatherOneCallModel(
+      lat: map['lat'],
+      lon: map['lon'],
+      timezone: map['timezone'],
+      current: OpenWeatherCurrentModel.fromMap(map['current']),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory OpenWeatherOneCallModel.fromJson(String source) =>
+      OpenWeatherOneCallModel.fromMap(json.decode(source));
 }
 
 class OpenWeatherCurrentModel extends OpenWeatherCurrent {
@@ -51,7 +58,7 @@ class OpenWeatherCurrentModel extends OpenWeatherCurrent {
     @required double visibility,
     @required double windSpeed,
     @required double windDeg,
-    @required List<OpenWeatherDescription> weather,
+    @required List<OpenWeatherDescriptionModel> weather,
   }) : super(
           dt: dt,
           sunrise: sunrise,
@@ -69,46 +76,51 @@ class OpenWeatherCurrentModel extends OpenWeatherCurrent {
           weather: weather,
         );
 
-  factory OpenWeatherCurrentModel.fromJson(Map<String, dynamic> json) {
-    return OpenWeatherCurrentModel(
-        dt: json['dt'],
-        sunrise: json['sunrise'],
-        sunset: json['sunset'],
-        temp: json['temp'],
-        feelsLike: json['feels_like'],
-        pressure: json['pressure'],
-        humidity: json['humidity'],
-        dewPoint: json['dew_point'],
-        uvi: json['uvi'],
-        clouds: json['clouds'],
-        visibility: json['visibility'],
-        windSpeed: json['wind_speed'],
-        windDeg: json['wind_deg'],
-        weather: json['weather'] != null
-            ? json['weather'].forEach((v) {
-                new OpenWeatherDescriptionModel.fromJson(v);
-              })
-            : null);
-  }
-
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
-      'dt': dt,
-      'sunrise': sunrise,
-      'sunset': sunset,
+      'dt': dt?.millisecondsSinceEpoch,
+      'sunrise': sunrise?.millisecondsSinceEpoch,
+      'sunset': sunset?.millisecondsSinceEpoch,
       'temp': temp,
-      'feels_like': feelsLike,
+      'feelsLike': feelsLike,
       'pressure': pressure,
       'humidity': humidity,
-      'dew_point': dewPoint,
+      'dewPoint': dewPoint,
       'uvi': uvi,
       'clouds': clouds,
       'visibility': visibility,
-      'wind_speed': windSpeed,
-      'wind_deg': windDeg,
-      'weather': weather,
+      'windSpeed': windSpeed,
+      'windDeg': windDeg,
+      'weather': weather?.map((x) => x?.toMap())?.toList(),
     };
   }
+
+  factory OpenWeatherCurrentModel.fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+
+    return OpenWeatherCurrentModel(
+      dt: DateTime.fromMillisecondsSinceEpoch(map['dt']),
+      sunrise: DateTime.fromMillisecondsSinceEpoch(map['sunrise']),
+      sunset: DateTime.fromMillisecondsSinceEpoch(map['sunset']),
+      temp: map['temp'],
+      feelsLike: map['feelsLike'],
+      pressure: map['pressure'],
+      humidity: map['humidity'],
+      dewPoint: map['dewPoint'],
+      uvi: map['uvi'],
+      clouds: map['clouds'],
+      visibility: map['visibility'],
+      windSpeed: map['windSpeed'],
+      windDeg: map['windDeg'],
+      weather: List<OpenWeatherDescriptionModel>.from(
+          map['weather']?.map((x) => OpenWeatherDescriptionModel.fromMap(x))),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory OpenWeatherCurrentModel.fromJson(String source) =>
+      OpenWeatherCurrentModel.fromMap(json.decode(source));
 }
 
 class OpenWeatherDescriptionModel extends OpenWeatherDescription {
@@ -122,19 +134,26 @@ class OpenWeatherDescriptionModel extends OpenWeatherDescription {
           description: description,
         );
 
-  factory OpenWeatherDescriptionModel.fromJson(Map<String, dynamic> json) {
-    return OpenWeatherDescriptionModel(
-      id: json['id'],
-      main: json['main'],
-      description: json['description'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
       'id': id,
       'main': main,
       'description': description,
     };
   }
+
+  factory OpenWeatherDescriptionModel.fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+
+    return OpenWeatherDescriptionModel(
+      id: map['id'],
+      main: map['main'],
+      description: map['description'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory OpenWeatherDescriptionModel.fromJson(String source) =>
+      OpenWeatherDescriptionModel.fromMap(json.decode(source));
 }

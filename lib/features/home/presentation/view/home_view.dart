@@ -16,10 +16,16 @@ class _HomeViewState extends State<HomeView> {
     return ViewModelBuilder<HomeViewModel>.reactive(
         builder: (context, model, child) {
           return Scaffold(
-            body: Center(
-              child: Text(model.text),
-            ),
-          );
+              body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(model.text),
+              SizedBox(
+                height: 10,
+              ),
+              Text(model.data.current.temp.toString())
+            ],
+          ));
         },
         viewModelBuilder: () => HomeViewModel());
   }

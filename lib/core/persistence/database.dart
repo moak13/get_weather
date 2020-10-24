@@ -1,6 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:meta/meta.dart';
 
+import '../../locator.dart';
+
 // This is a contract database class
 abstract class Database {
   Future<void> save({@required String key, @required String value});
@@ -8,8 +10,7 @@ abstract class Database {
 }
 
 class DatabaseImpl implements Database {
-  final SharedPreferences sharedPreferences;
-  DatabaseImpl({@required this.sharedPreferences});
+  final SharedPreferences sharedPreferences = locator<SharedPreferences>();
 
   // This set the data to be stored
   @override

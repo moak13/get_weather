@@ -1,12 +1,11 @@
 import 'dart:convert';
 
-import 'package:meta/meta.dart';
-
 import '../../../../core/errors/exceptions.dart';
 import '../../../../core/persistence/database.dart';
+import '../../../../locator.dart';
 import '../model/open_weather_one_call_model.dart';
 
-const String key = '';
+const String key = 'home';
 
 abstract class OneCallLocalDataSource {
   /// Gets the cached [OpenWeatherOneCallModel] which was gotten the last time
@@ -23,9 +22,7 @@ abstract class OneCallLocalDataSource {
 }
 
 class OneCallLocalDataSourceImpl implements OneCallLocalDataSource {
-  final Database database;
-
-  OneCallLocalDataSourceImpl({@required this.database});
+  Database database = locator<Database>();
   @override
   Future<void> cacheData(OpenWeatherOneCallModel cacheData) {
     return database.save(

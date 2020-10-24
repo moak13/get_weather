@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
-import 'package:meta/meta.dart';
+
+import '../../locator.dart';
 
 abstract class AppHttpClient {
   Future<http.Response> getOne(String url,
@@ -9,9 +10,7 @@ abstract class AppHttpClient {
 }
 
 class AppHttpClientImpl implements AppHttpClient {
-  final http.Client client;
-
-  AppHttpClientImpl({@required this.client});
+  final http.Client client = locator<http.Client>();
   @override
   Future<http.Response> getOne(String url,
       {Map<String, String> body, Map<String, String> headers}) async {

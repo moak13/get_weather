@@ -6,6 +6,8 @@ import 'package:stacked_services/stacked_services.dart';
 
 import 'core/network/network_handler.dart';
 import 'core/persistence/database.dart';
+import 'data_source/local/current_weather_local_data_source.dart';
+import 'data_source/local/one_call_weather_local_data_source.dart';
 
 GetIt locator = GetIt.instance();
 
@@ -17,4 +19,8 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton(() => http.Client());
   locator.registerLazySingleton<AppHttpClient>(() => AppHttpClientImpl());
   locator.registerLazySingleton<Database>(() => DatabaseImpl());
+  locator.registerLazySingleton<OneCallWeatherLocalDataSource>(
+      () => OneCallWeatherLocalDataSourceImpl());
+  locator.registerLazySingleton<CurrentWeatherLocalDataSource>(
+      () => CurrentWeatherLocalDataSourceImpl());
 }

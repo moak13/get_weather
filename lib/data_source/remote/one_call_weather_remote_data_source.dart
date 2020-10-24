@@ -15,7 +15,7 @@ class OneCallWeatherRemoteDataSourceImpl
   Future<OneCallWeatherModel> fetchOneCallWeather(
       {double lon, double lat}) async {
     final String url = StringConstant.base_url +
-        '/onecall?lat=$lat&lon=$lon&exclude=hourly,daily&appid=${StringConstant.app_id}';
+        'onecall?lat=$lat&lon=$lon&exclude=hourly,daily&appid=${StringConstant.app_id}';
     final response = await _networkHandler.getOneCallWeather(url);
 
     if (response.statusCode == 200) {

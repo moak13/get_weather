@@ -8,6 +8,7 @@ import 'core/network/network_handler.dart';
 import 'core/persistence/database.dart';
 import 'data_source/local/current_weather_local_data_source.dart';
 import 'data_source/local/one_call_weather_local_data_source.dart';
+import 'data_source/remote/current_weather_remote_data_source.dart';
 import 'data_source/remote/one_call_weather_remote_data_source.dart';
 
 GetIt locator = GetIt.instance();
@@ -26,4 +27,6 @@ Future<void> setupLocator() async {
       () => CurrentWeatherLocalDataSourceImpl());
   locator.registerLazySingleton<OneCallWeatherRemoteDataSource>(
       () => OneCallWeatherRemoteDataSourceImpl());
+  locator.registerLazySingleton<CurrentWeatherRemoteDataSource>(
+      () => CurrentWeatherRemoteDataSourceImpl());
 }

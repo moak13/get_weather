@@ -7,7 +7,7 @@ import '../../locator.dart';
 abstract class Database {
   Future<void> save({@required String key, @required String value});
   Future<String> pull({@required String key});
-  Future<void> delete({@required String key});
+  Future<bool> delete({@required String key});
 }
 
 class DatabaseImpl implements Database {
@@ -26,7 +26,7 @@ class DatabaseImpl implements Database {
   }
 
   @override
-  Future<void> delete({String key}) {
+  Future<bool> delete({String key}) {
     return sharedPreferences.remove(key);
   }
 }

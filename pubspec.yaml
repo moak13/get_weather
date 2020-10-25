@@ -23,46 +23,28 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # Network Call
-  http: ^0.12.2
-  data_connection_checker: ^0.3.4
-  # Local Cache
-  shared_preferences: ^0.5.8
-  # State Management
-  stacked: ^1.7.4
-  # App Services
-  stacked_services: ^0.4.8
-  # Functional Programming Thingies
-  dartz: ^0.9.1
-  # Data Equality
-  equatable: ^1.2.2
-  # Dependency Injection
-  get_it: ^4.0.4
-  # Navigation
   auto_route: ^0.6.6
-  # Platform Specific UI
-  flutter_platform_widgets: ^0.51.0
-  
-  
-  
-  
-  
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
+  dartz: ^0.9.1
+  data_connection_checker: ^0.3.4
+  equatable: ^1.2.2
+  flutter_platform_widgets: ^0.51.0
+  geolocator: ^6.1.1
+  get_it: ^4.0.4
+  http: ^0.12.2
+  shared_preferences: ^0.5.8
+  stacked: ^1.7.4
+  stacked_services: ^0.4.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  auto_route_generator: ^0.6.6
   # Code Generation
   build_runner: ^1.10.0
-  auto_route_generator: ^0.6.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
 
@@ -70,18 +52,14 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

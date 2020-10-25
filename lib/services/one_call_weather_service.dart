@@ -7,8 +7,7 @@ import '../locator.dart';
 import '../models/one_call_weather_model.dart';
 
 abstract class OneCallWeatherService {
-  Future<Result<OneCallWeatherModel>> performOneCallWeather(
-      {double lon, double lat});
+  Future<Result<OneCallWeatherModel>> performOneCallWeather();
 }
 
 class OneCallWeatherServiceImpl implements OneCallWeatherService {
@@ -16,13 +15,11 @@ class OneCallWeatherServiceImpl implements OneCallWeatherService {
   final _remoteData = locator<OneCallWeatherRemoteDataSource>();
   final _localData = locator<OneCallWeatherLocalDataSource>();
   @override
-  Future<Result<OneCallWeatherModel>> performOneCallWeather(
-      {double lon, double lat}) async {
+  Future<Result<OneCallWeatherModel>> performOneCallWeather() async {
     bool isConnected = await _networkInfo.isConnected;
     if (isConnected) {
       try {
-        final response =
-            await _remoteData.fetchOneCallWeather(lat: lat, lon: lon);
+        final response = await _remoteData.fetchOneCallWeather();
         _localData.saveResponse(oneCallWeatherModel: response);
         return Result(success: response);
       } on ServerException catch (err) {

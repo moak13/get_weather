@@ -30,7 +30,8 @@ class CurrentWeatherServiceImpl implements CurrentWeatherService {
     } else {
       try {
         final response = await _localData.getResponse();
-        return Result(success: response);
+        return Result(
+            success: response, error: Error(message: 'No Internet Connection'));
       } on CacheException catch (e) {
         return Result(error: Error(message: e.toString()));
       }

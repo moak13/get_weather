@@ -1,5 +1,6 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
+import 'package:get_weather/core/network/network_info.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -23,6 +24,7 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton(() => DataConnectionChecker());
   locator.registerLazySingleton(() => UserCurrentPosition());
   locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl());
   locator.registerLazySingleton<AppHttpClient>(() => AppHttpClientImpl());
   locator.registerLazySingleton<Database>(() => DatabaseImpl());
   locator.registerLazySingleton<OneCallWeatherLocalDataSource>(

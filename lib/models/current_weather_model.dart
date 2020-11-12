@@ -10,14 +10,14 @@ class CurrentWeatherModel extends Equatable {
   final DateTime sunset;
   final double temp;
   final double feelsLike;
-  final double pressure;
-  final double humidity;
+  final int pressure;
+  final int humidity;
   final double dewPoint;
   final double uvi;
-  final double clouds;
-  final double visibility;
+  final int clouds;
+  final int visibility;
   final double windSpeed;
-  final double windDeg;
+  final int windDeg;
   final List<WeatherDescriptionModel> weatherDescription;
   CurrentWeatherModel({
     this.dt,
@@ -80,15 +80,15 @@ class CurrentWeatherModel extends Equatable {
       sunrise: DateTime.fromMillisecondsSinceEpoch(map['sunrise']),
       sunset: DateTime.fromMillisecondsSinceEpoch(map['sunset']),
       temp: map['temp'],
-      feelsLike: map['feelsLike'],
+      feelsLike: map['feels_like'],
       pressure: map['pressure'],
       humidity: map['humidity'],
-      dewPoint: map['dewPoint'],
+      dewPoint: map['dew_point'],
       uvi: map['uvi'],
       clouds: map['clouds'],
       visibility: map['visibility'],
-      windSpeed: map['windSpeed'],
-      windDeg: map['windDeg'],
+      windSpeed: map['wind_speed'],
+      windDeg: map['wind_deg'],
       weatherDescription: List<WeatherDescriptionModel>.from(
           map['weather']?.map((x) => WeatherDescriptionModel.fromMap(x))),
     );

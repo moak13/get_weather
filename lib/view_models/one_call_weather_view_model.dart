@@ -5,12 +5,27 @@ import '../locator.dart';
 import '../models/one_call_weather_model.dart';
 import '../services/one_call_weather_service.dart';
 
-class OneCallWeatherViewModel
-    extends FutureViewModel<Result<OneCallWeatherModel>> {
+class OneCallWeatherViewModel extends BaseViewModel {
+  OneCallWeatherModel _oneCallWeatherModel;
+  OneCallWeatherModel get oneCallWeatherModel => _oneCallWeatherModel;
+
+  String _err;
+  String get err => _err;
   final _oneCallWeatherService = locator<OneCallWeatherService>();
 
-  @override
   Future<Result<OneCallWeatherModel>> futureToRun() async {
-    return await _oneCallWeatherService.performOneCallWeather();
+    setBusy(true);
+    final response = await _oneCallWeatherService.performOneCallWeather();
+    print(response.success);
+    print(response.error);
+    setBusy(false);
+    if (response.success == null) {
+      _err = response.error.message;
+      notifyListeners();
+    } else {
+      _oneCallWeatherModel = response.success;
+      notifyListeners();
+    }
+    return response;
   }
 }

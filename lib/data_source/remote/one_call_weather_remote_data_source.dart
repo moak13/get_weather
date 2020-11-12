@@ -1,3 +1,5 @@
+// import 'package:geocoding/geocoding.dart';
+
 import '../../core/errors/exceptions.dart';
 import '../../core/network/network_handler.dart';
 import '../../core/utils/string_constant.dart';
@@ -15,9 +17,15 @@ class OneCallWeatherRemoteDataSourceImpl
   final _location = locator<UserCurrentPosition>();
   @override
   Future<OneCallWeatherModel> fetchOneCallWeather() async {
-    await _location.getUserCurrentLocation();
+    final UserCurrentPosition _userLocation =
+        await _location.getUserCurrentLocation();
+    // List<Placemark> placemarks = await placemarkFromCoordinates(
+    //     _userLocation.latitude, _userLocation.longitude);
+    // print(placemarks);
+    print('lon: ' + _userLocation.longitude.toString());
+    print('lat: ' + _userLocation.latitude.toString());
     final String url = StringConstant.base_url +
-        'onecall?lat=${_location.latitude}&lon=${_location.longitude}&exclude=hourly,daily&appid=${StringConstant.app_id}';
+        'onecall?lat=${_userLocation.latitude}&lon=${_userLocation.longitude}&exclude=hourly,daily&appid=${StringConstant.app_id}';
     final response = await _networkHandler.getOneCallWeather(url);
 
     if (response.statusCode == 200) {

@@ -29,6 +29,7 @@ dependencies:
   data_connection_checker: ^0.3.4
   equatable: ^1.2.2
   flutter_platform_widgets: ^0.51.0
+  geocoding: ^1.0.5
   geolocator: ^6.1.1
   get_it: ^4.0.4
   http: ^0.12.2

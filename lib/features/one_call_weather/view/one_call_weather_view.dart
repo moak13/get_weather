@@ -16,65 +16,204 @@ class OneCallWeatherView extends StatelessWidget {
     return ViewModelBuilder<OneCallWeatherViewModel>.reactive(
       onModelReady: (model) => model.futureToRun(),
       builder: (context, model, child) => Scaffold(
-        body: ListView(
-          children: <Widget>[
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[Text('26'), Text('partly cloudly')],
-            ),
-            Expanded(
-              child: SizedBox(
-                height: scaleHeight * 400,
+        body: model.isBusy
+            ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Fetching Weather Data...',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: textScale * 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: scaleHeight * 12),
+                    CircularProgressIndicator()
+                  ],
+                ),
+              )
+            : RefreshIndicator(
+                onRefresh: () => model.futureToRun(),
+                child: ListView(
+                  children: <Widget>[
+                    SizedBox(
+                      height: scaleHeight * 5,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            model.oneCallWeatherModel.timezone ??
+                                'No Time Zone',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: textScale * 35,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(
+                      Icons.language,
+                      size: scaleHeight * 30,
+                    ),
+                    SizedBox(
+                      height: scaleHeight * 3,
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Text(
+                          model.oneCallWeatherModel.currentWeather.temp
+                                  .toStringAsFixed(0)
+                                  .toString() +
+                              '°C',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: textScale * 40,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          model.oneCallWeatherModel.currentWeather
+                              .weatherDescription[0].description,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: textScale * 20,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: scaleHeight * 27,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    'Humidity',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: textScale * 15,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                  SizedBox(width: scaleWidth * 18),
+                                  Text(
+                                    '${model.oneCallWeatherModel.currentWeather.humidity} %',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: textScale * 13,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    'Dew Point',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: textScale * 15,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                  SizedBox(width: scaleWidth * 12),
+                                  Text(
+                                    model.oneCallWeatherModel.currentWeather
+                                        .dewPoint
+                                        .toString(),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: textScale * 13,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    'Wind',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: textScale * 15,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                  SizedBox(width: scaleWidth * 19),
+                                  Text(
+                                    '${model.oneCallWeatherModel.currentWeather.windSpeed} m/s',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: textScale * 13,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    'Pressure',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: textScale * 15,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                  SizedBox(width: scaleWidth * 12),
+                                  Text(
+                                    '${model.oneCallWeatherModel.currentWeather.pressure} hPa',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: textScale * 13,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Text('Humidity'),
-                        Text('88%'),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Text('Precipitation'),
-                        Text('80%'),
-                      ],
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Text('Wind'),
-                        Text('10km/h'),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Text('Pressure'),
-                        Text('10122mb'),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            )
-          ],
-        ),
       ),
       viewModelBuilder: () => OneCallWeatherViewModel(),
     );

@@ -11,8 +11,10 @@ import 'data_source/local/current_weather_local_data_source.dart';
 import 'data_source/local/one_call_weather_local_data_source.dart';
 import 'data_source/remote/current_weather_remote_data_source.dart';
 import 'data_source/remote/one_call_weather_remote_data_source.dart';
+import 'services/current_weather_service.dart';
+import 'services/one_call_weather_service.dart';
 
-GetIt locator = GetIt.instance();
+GetIt locator = GetIt.instance;
 
 Future<void> setupLocator() async {
   final pref = await SharedPreferences.getInstance();
@@ -31,4 +33,8 @@ Future<void> setupLocator() async {
       () => OneCallWeatherRemoteDataSourceImpl());
   locator.registerLazySingleton<CurrentWeatherRemoteDataSource>(
       () => CurrentWeatherRemoteDataSourceImpl());
+  locator.registerLazySingleton<OneCallWeatherService>(
+      () => OneCallWeatherServiceImpl());
+  locator.registerLazySingleton<CurrentWeatherService>(
+      () => CurrentWeatherServiceImpl());
 }

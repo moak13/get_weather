@@ -21,6 +21,7 @@ class OneCallWeatherRemoteDataSourceImpl
     final response = await _networkHandler.getOneCallWeather(url);
 
     if (response.statusCode == 200) {
+      print(response.body);
       return OneCallWeatherModel.fromJson(response.body);
     } else {
       throw ServerException.fromJson(response.body);

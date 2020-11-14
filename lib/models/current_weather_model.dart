@@ -2,73 +2,34 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
+import 'main_weather_model.dart';
 import 'weather_description_model.dart';
+import 'wind_weather_model.dart';
 
 class CurrentWeatherModel extends Equatable {
-  final DateTime dt;
-  final DateTime sunrise;
-  final DateTime sunset;
-  final double temp;
-  final double feelsLike;
-  final int pressure;
-  final int humidity;
-  final double dewPoint;
-  final double uvi;
-  final int clouds;
-  final int visibility;
-  final double windSpeed;
-  final int windDeg;
-  final List<WeatherDescriptionModel> weatherDescription;
+  final List<WeatherDescriptionModel> weather;
+  final MainWeatherModel main;
+  final WindWeatherModel wind;
+  final int id;
+  final String name;
   CurrentWeatherModel({
-    this.dt,
-    this.sunrise,
-    this.sunset,
-    this.temp,
-    this.feelsLike,
-    this.pressure,
-    this.humidity,
-    this.dewPoint,
-    this.uvi,
-    this.clouds,
-    this.visibility,
-    this.windSpeed,
-    this.windDeg,
-    this.weatherDescription,
+    this.weather,
+    this.main,
+    this.wind,
+    this.id,
+    this.name,
   });
+
   @override
-  List<Object> get props => [
-        dt,
-        sunrise,
-        sunset,
-        temp,
-        feelsLike,
-        pressure,
-        humidity,
-        dewPoint,
-        uvi,
-        clouds,
-        visibility,
-        windSpeed,
-        windDeg,
-        weatherDescription
-      ];
+  List<Object> get props => [weather, main, wind, id, name];
 
   Map<String, dynamic> toMap() {
     return {
-      'dt': dt?.millisecondsSinceEpoch,
-      'sunrise': sunrise?.millisecondsSinceEpoch,
-      'sunset': sunset?.millisecondsSinceEpoch,
-      'temp': temp,
-      'feelsLike': feelsLike,
-      'pressure': pressure,
-      'humidity': humidity,
-      'dewPoint': dewPoint,
-      'uvi': uvi,
-      'clouds': clouds,
-      'visibility': visibility,
-      'windSpeed': windSpeed,
-      'windDeg': windDeg,
-      'weather': weatherDescription?.map((x) => x?.toMap())?.toList(),
+      'weather': weather?.map((x) => x?.toMap())?.toList(),
+      'main': main?.toMap(),
+      'wind': wind?.toMap(),
+      'id': id,
+      'name': name,
     };
   }
 
@@ -76,21 +37,12 @@ class CurrentWeatherModel extends Equatable {
     if (map == null) return null;
 
     return CurrentWeatherModel(
-      dt: DateTime.fromMillisecondsSinceEpoch(map['dt']),
-      sunrise: DateTime.fromMillisecondsSinceEpoch(map['sunrise']),
-      sunset: DateTime.fromMillisecondsSinceEpoch(map['sunset']),
-      temp: map['temp'],
-      feelsLike: map['feels_like'],
-      pressure: map['pressure'],
-      humidity: map['humidity'],
-      dewPoint: map['dew_point'],
-      uvi: map['uvi'],
-      clouds: map['clouds'],
-      visibility: map['visibility'],
-      windSpeed: map['wind_speed'],
-      windDeg: map['wind_deg'],
-      weatherDescription: List<WeatherDescriptionModel>.from(
+      weather: List<WeatherDescriptionModel>.from(
           map['weather']?.map((x) => WeatherDescriptionModel.fromMap(x))),
+      main: MainWeatherModel.fromMap(map['main']),
+      wind: WindWeatherModel.fromMap(map['wind']),
+      id: map['id'],
+      name: map['name'],
     );
   }
 

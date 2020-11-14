@@ -9,11 +9,11 @@ import 'core/network/network_handler.dart';
 import 'core/persistence/database.dart';
 import 'core/utils/user_current_position.dart';
 import 'data_source/local/current_weather_local_data_source.dart';
-import 'data_source/local/one_call_weather_local_data_source.dart';
+import 'data_source/local/geocord_current_weather_local_data_source.dart';
 import 'data_source/remote/current_weather_remote_data_source.dart';
-import 'data_source/remote/one_call_weather_remote_data_source.dart';
+import 'data_source/remote/geocord_current_weather_remote_data_source.dart';
 import 'services/current_weather_service.dart';
-import 'services/one_call_weather_service.dart';
+import 'services/geocord_current_weather_service.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -27,16 +27,16 @@ Future<void> setupLocator() async {
   locator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl());
   locator.registerLazySingleton<AppHttpClient>(() => AppHttpClientImpl());
   locator.registerLazySingleton<Database>(() => DatabaseImpl());
-  locator.registerLazySingleton<OneCallWeatherLocalDataSource>(
-      () => OneCallWeatherLocalDataSourceImpl());
+  locator.registerLazySingleton<GeoCordCurrentWeatherLocalDataSource>(
+      () => GeoCordCurrentWeatherLocalDataSourceImpl());
   locator.registerLazySingleton<CurrentWeatherLocalDataSource>(
       () => CurrentWeatherLocalDataSourceImpl());
-  locator.registerLazySingleton<OneCallWeatherRemoteDataSource>(
-      () => OneCallWeatherRemoteDataSourceImpl());
+  locator.registerLazySingleton<GeoCordCurrentWeatherRemoteDataSource>(
+      () => GeoCordCurrentWeatherRemoteDataSourceImpl());
   locator.registerLazySingleton<CurrentWeatherRemoteDataSource>(
       () => CurrentWeatherRemoteDataSourceImpl());
-  locator.registerLazySingleton<OneCallWeatherService>(
-      () => OneCallWeatherServiceImpl());
+  locator.registerLazySingleton<GeoCordCurrentWeatherService>(
+      () => GeoCordCurrentWeatherServiceImpl());
   locator.registerLazySingleton<CurrentWeatherService>(
       () => CurrentWeatherServiceImpl());
 }

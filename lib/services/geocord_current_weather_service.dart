@@ -1,26 +1,26 @@
 import '../core/errors/exceptions.dart';
 import '../core/network/network_info.dart';
 import '../core/utils/result.dart';
-import '../data_source/local/one_call_weather_local_data_source.dart';
-import '../data_source/remote/one_call_weather_remote_data_source.dart';
+import '../data_source/local/geocord_current_weather_local_data_source.dart';
+import '../data_source/remote/geocord_current_weather_remote_data_source.dart';
 import '../locator.dart';
-import '../models/one_call_weather_model.dart';
+import '../models/current_weather_model.dart';
 
-abstract class OneCallWeatherService {
-  Future<Result<OneCallWeatherModel>> performOneCallWeather();
+abstract class GeoCordCurrentWeatherService {
+  Future<Result<CurrentWeatherModel>> performGeoCordCurrentWeather();
 }
 
-class OneCallWeatherServiceImpl implements OneCallWeatherService {
+class GeoCordCurrentWeatherServiceImpl implements GeoCordCurrentWeatherService {
   final _networkInfo = locator<NetworkInfo>();
-  final _remoteData = locator<OneCallWeatherRemoteDataSource>();
-  final _localData = locator<OneCallWeatherLocalDataSource>();
+  final _remoteData = locator<GeoCordCurrentWeatherRemoteDataSource>();
+  final _localData = locator<GeoCordCurrentWeatherLocalDataSource>();
   @override
-  Future<Result<OneCallWeatherModel>> performOneCallWeather() async {
+  Future<Result<CurrentWeatherModel>> performGeoCordCurrentWeather() async {
     bool isConnected = await _networkInfo.isConnected;
     if (isConnected) {
       try {
-        final response = await _remoteData.fetchOneCallWeather();
-        _localData.saveResponse(oneCallWeatherModel: response);
+        final response = await _remoteData.fetchCurrentWeather();
+        _localData.saveResponse(currentWeatherModel: response);
         return Result(success: response);
       } on ServerException catch (err) {
         return Result(error: Error(message: err.message));

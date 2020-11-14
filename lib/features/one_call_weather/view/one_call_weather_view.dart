@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../../view_models/one_call_weather_view_model.dart';
+import '../../../view_models/geocord_current_weather_view_model.dart';
 
-class OneCallWeatherView extends StatelessWidget {
-  const OneCallWeatherView({Key key}) : super(key: key);
+class GeoCordCurrentWeatherView extends StatelessWidget {
+  const GeoCordCurrentWeatherView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class OneCallWeatherView extends StatelessWidget {
     double textScale = MediaQuery.of(context).textScaleFactor;
     double scaleHeight = screenHeight / 100;
     double scaleWidth = screenWidth / 100;
-    return ViewModelBuilder<OneCallWeatherViewModel>.reactive(
+    return ViewModelBuilder<GeoCordCurrentWeatherViewModel>.reactive(
       onModelReady: (model) => model.futureToRun(),
       builder: (context, model, child) => Scaffold(
         body: model.isBusy
@@ -47,8 +47,7 @@ class OneCallWeatherView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            model.oneCallWeatherModel.timezone ??
-                                'No Time Zone',
+                            model.currentWeatherModel.name ?? 'No Time Zone',
                             style: TextStyle(
                               color: Colors.blue,
                               fontSize: textScale * 35,
@@ -70,7 +69,7 @@ class OneCallWeatherView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         Text(
-                          model.oneCallWeatherModel.currentWeather.temp
+                          model.currentWeatherModel.main.temp
                                   .toStringAsFixed(0)
                                   .toString() +
                               '°C',
@@ -81,8 +80,7 @@ class OneCallWeatherView extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          model.oneCallWeatherModel.currentWeather
-                              .weatherDescription[0].description,
+                          model.currentWeatherModel.weather[0].description,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: textScale * 20,
@@ -117,7 +115,7 @@ class OneCallWeatherView extends StatelessWidget {
                                   ),
                                   SizedBox(width: scaleWidth * 18),
                                   Text(
-                                    '${model.oneCallWeatherModel.currentWeather.humidity} %',
+                                    '${model.currentWeatherModel.main.humidity} %',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: textScale * 13,
@@ -140,9 +138,7 @@ class OneCallWeatherView extends StatelessWidget {
                                   ),
                                   SizedBox(width: scaleWidth * 12),
                                   Text(
-                                    model.oneCallWeatherModel.currentWeather
-                                        .dewPoint
-                                        .toString(),
+                                    'coming',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: textScale * 13,
@@ -174,7 +170,7 @@ class OneCallWeatherView extends StatelessWidget {
                                   ),
                                   SizedBox(width: scaleWidth * 19),
                                   Text(
-                                    '${model.oneCallWeatherModel.currentWeather.windSpeed} m/s',
+                                    '${model.currentWeatherModel.wind.speed} m/s',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: textScale * 13,
@@ -197,7 +193,7 @@ class OneCallWeatherView extends StatelessWidget {
                                   ),
                                   SizedBox(width: scaleWidth * 12),
                                   Text(
-                                    '${model.oneCallWeatherModel.currentWeather.pressure} hPa',
+                                    '${model.currentWeatherModel.main.pressure} hPa',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: textScale * 13,
@@ -215,7 +211,7 @@ class OneCallWeatherView extends StatelessWidget {
                 ),
               ),
       ),
-      viewModelBuilder: () => OneCallWeatherViewModel(),
+      viewModelBuilder: () => GeoCordCurrentWeatherViewModel(),
     );
   }
 }

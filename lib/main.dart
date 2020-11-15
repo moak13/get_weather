@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'features/one_call_weather/view/one_call_weather_view.dart';
+import 'features/geocord_current_weather/view/geocord_current_weather_view.dart';
 import 'locator.dart';
 
 void main() async {

@@ -5,14 +5,15 @@ import '../../locator.dart';
 import '../../models/current_weather_model.dart';
 
 abstract class CurrentWeatherRemoteDataSource {
-  Future<CurrentWeatherModel> fetchCurrentWeather({String cityName});
+  Future<CurrentWeatherModel> fetchCurrentWeatherByName({String cityName});
 }
 
 class CurrentWeatherRemoteDataSourceImpl
     implements CurrentWeatherRemoteDataSource {
   final _networkHandler = locator<AppHttpClient>();
   @override
-  Future<CurrentWeatherModel> fetchCurrentWeather({String cityName}) async {
+  Future<CurrentWeatherModel> fetchCurrentWeatherByName(
+      {String cityName}) async {
     final url = StringConstant.base_url +
         'weather?q=$cityName&appid=${StringConstant.app_id}';
     final response = await _networkHandler.getCurrentWeather(url);

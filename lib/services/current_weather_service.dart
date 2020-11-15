@@ -7,7 +7,8 @@ import '../locator.dart';
 import '../models/current_weather_model.dart';
 
 abstract class CurrentWeatherService {
-  Future<Result<CurrentWeatherModel>> performCurrentWeather({String cityName});
+  Future<Result<CurrentWeatherModel>> performCurrentWeatherByName(
+      {String cityName});
 }
 
 class CurrentWeatherServiceImpl implements CurrentWeatherService {
@@ -15,13 +16,13 @@ class CurrentWeatherServiceImpl implements CurrentWeatherService {
   final _localData = locator<CurrentWeatherLocalDataSource>();
   final _networkInfo = locator<NetworkInfo>();
   @override
-  Future<Result<CurrentWeatherModel>> performCurrentWeather(
+  Future<Result<CurrentWeatherModel>> performCurrentWeatherByName(
       {String cityName}) async {
     bool isConnected = await _networkInfo.isConnected;
     if (isConnected) {
       try {
         final response =
-            await _remoteData.fetchCurrentWeather(cityName: cityName);
+            await _remoteData.fetchCurrentWeatherByName(cityName: cityName);
         _localData.saveResponse(currentWeatherModel: response);
         return Result(success: response);
       } on ServerException catch (e) {

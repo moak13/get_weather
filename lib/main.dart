@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'features/geocord_current_weather/view/geocord_current_weather_view.dart';
+import 'features/wrapper/view/wrapper_view.dart';
 import 'locator.dart';
 
 void main() async {
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: GeoCordCurrentWeatherView(),
+      home: WrapperView(),
     );
   }
 }

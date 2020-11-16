@@ -21,8 +21,8 @@ class DatabaseImpl implements Database {
 
   // This get the stored data
   @override
-  Future<String> pull({String key}) {
-    return sharedPreferences.get(key);
+  Future<String> pull({String key}) async {
+    return await sharedPreferences.get(key);
   }
 
   @override

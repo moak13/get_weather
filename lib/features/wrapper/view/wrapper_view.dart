@@ -11,8 +11,10 @@ class WrapperView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<WrapperViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-        body: GetIndexView(
-          index: model.currentIndex,
+        body: SafeArea(
+          child: GetIndexView(
+            index: model.currentIndex,
+          ),
         ),
         bottomNavigationBar: BottomNavigationBar(
             backgroundColor: Colors.white,

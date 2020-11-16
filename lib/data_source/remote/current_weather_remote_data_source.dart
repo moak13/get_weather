@@ -17,6 +17,7 @@ class CurrentWeatherRemoteDataSourceImpl
     final url = StringConstant.base_url +
         'weather?q=$cityName&appid=${StringConstant.app_id}';
     final response = await _networkHandler.getCurrentWeather(url);
+    print(response.body);
 
     if (response.statusCode == 200) {
       return CurrentWeatherModel.fromJson(response.body);

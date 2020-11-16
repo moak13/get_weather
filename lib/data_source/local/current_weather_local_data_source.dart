@@ -52,8 +52,8 @@ class CurrentWeatherLocalDataSourceImpl
   @override
   Future<CurrentWeatherModel> saveResponse(
       {CurrentWeatherModel currentWeatherModel}) {
-    final value = json.decode(currentWeatherModel.toJson());
+    final value = json.encode(currentWeatherModel.toJson());
     _databaseHandler.save(key: CURRENT_WEATHER_KEY, value: value);
-    return Future.value(value);
+    return Future.value(currentWeatherModel);
   }
 }

@@ -18,7 +18,7 @@ class CurrentWeatherView extends StatelessWidget {
             height: scaleHeight * 10,
           ),
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
                 'Get to know the weather condition of a place.',
@@ -29,23 +29,28 @@ class CurrentWeatherView extends StatelessWidget {
                 ),
               ),
               Text(
-                'Use the search bar to get started',
+                'Use the search bar to get started!',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: textScale * 20,
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w300,
                 ),
               )
             ],
           ),
           SizedBox(
-            height: scaleHeight * 20,
+            height: scaleHeight * 25,
           ),
           TextField(
             decoration: InputDecoration(
-                hintText: 'Enter City Name',
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10))),
+              hintText: 'Enter City Name',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: scaleHeight * 4,
           ),
           InkWell(
             onTap: () {},

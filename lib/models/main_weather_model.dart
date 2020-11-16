@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:get_weather/core/utils/value_converter.dart';
 
 class MainWeatherModel extends Equatable {
   final double temp;
@@ -26,7 +27,7 @@ class MainWeatherModel extends Equatable {
     if (map == null) return null;
 
     return MainWeatherModel(
-      temp: map['temp'],
+      temp: toCelcius(map['temp']),
       pressure: map['pressure'],
       humidity: map['humidity'],
     );

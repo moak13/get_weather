@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../view_models/geocord_current_weather_view_model.dart';
+import '../widget/readings_widget.dart';
 
 class GeoCordCurrentWeatherView extends StatelessWidget {
   const GeoCordCurrentWeatherView({Key key}) : super(key: key);
@@ -9,10 +10,10 @@ class GeoCordCurrentWeatherView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
+    //double screenWidth = MediaQuery.of(context).size.width;
     double textScale = MediaQuery.of(context).textScaleFactor;
     double scaleHeight = screenHeight / 100;
-    double scaleWidth = screenWidth / 100;
+    //double scaleWidth = screenWidth / 100;
     return ViewModelBuilder<GeoCordCurrentWeatherViewModel>.reactive(
       onModelReady: (model) => model.futureToRun(),
       builder: (context, model, child) => Scaffold(
@@ -93,117 +94,26 @@ class GeoCordCurrentWeatherView extends StatelessWidget {
                       height: scaleHeight * 27,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    'Humidity',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: textScale * 15,
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                  ),
-                                  SizedBox(width: scaleWidth * 18),
-                                  Text(
-                                    '${model.currentWeatherModel.main.humidity} %',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: textScale * 13,
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    'Dew Point',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: textScale * 15,
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                  ),
-                                  SizedBox(width: scaleWidth * 12),
-                                  Text(
-                                    'coming',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: textScale * 13,
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                        ReadingsWidget(
+                          textSize: textScale,
+                          scaleHeight: scaleHeight,
+                          title: 'Humidity',
+                          value: '${model.currentWeatherModel.main.humidity} %',
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    'Wind',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: textScale * 15,
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                  ),
-                                  SizedBox(width: scaleWidth * 19),
-                                  Text(
-                                    '${model.currentWeatherModel.wind.speed} m/s',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: textScale * 13,
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    'Pressure',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: textScale * 15,
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                  ),
-                                  SizedBox(width: scaleWidth * 12),
-                                  Text(
-                                    '${model.currentWeatherModel.main.pressure} hPa',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: textScale * 13,
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                        ReadingsWidget(
+                          textSize: textScale,
+                          scaleHeight: scaleHeight,
+                          title: 'Wind',
+                          value: '${model.currentWeatherModel.wind.speed} m/s',
+                        ),
+                        ReadingsWidget(
+                          textSize: textScale,
+                          scaleHeight: scaleHeight,
+                          title: 'Pressure',
+                          value:
+                              '${model.currentWeatherModel.main.pressure} hPa',
                         ),
                       ],
                     )

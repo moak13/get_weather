@@ -93,7 +93,7 @@ class GeoCordCurrentWeatherView extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: scaleHeight * 27,
+                          height: scaleHeight * 17,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,

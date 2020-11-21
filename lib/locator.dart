@@ -21,6 +21,7 @@ Future<void> setupLocator() async {
   final pref = await SharedPreferences.getInstance();
   locator.registerLazySingleton(() => pref);
   locator.registerLazySingleton(() => NavigationService());
+  locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => DataConnectionChecker());
   locator.registerLazySingleton(() => UserCurrentPosition());
   locator.registerLazySingleton(() => http.Client());

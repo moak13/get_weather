@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 import '../core/utils/result.dart';
+import '../features/current_weather/widget/result_modal_view.dart';
 import '../locator.dart';
 import '../models/current_weather_model.dart';
 import '../services/current_weather_service.dart';
 
 class CurrentWeatherViewModel extends BaseViewModel {
   final _currentWeatherService = locator<CurrentWeatherService>();
+
+  final _navigationService = locator<NavigationService>();
   TextEditingController _ctrlCityName = TextEditingController();
   TextEditingController get ctrlCityName => _ctrlCityName;
 
-  CurrentWeatherModel _currentWeatherModel;
-  CurrentWeatherModel get currentWeatherModel => _currentWeatherModel;
-
-  bool _hasError = false;
-  bool get hasError => _hasError;
-
-  String _err;
-  String get err => _err;
-
-  Future<Result<CurrentWeatherModel>> futureToRun(String cityName) async {
+  Future<Result<CurrentWeatherModel>> futureToRun(
+    BuildContext context,
+    String cityName,
+    double scaledHeight,
+    double scaledWidth,
+    double textSize,
+  ) async {
     setBusy(true);
     final response = await _currentWeatherService.performCurrentWeatherByName(
         cityName: cityName);
@@ -28,19 +29,60 @@ class CurrentWeatherViewModel extends BaseViewModel {
     print(response.error);
     setBusy(false);
     if (response.success == null) {
-      _hasError = true;
-      _err = response.error.message;
+      await showDialog(
+          context: context,
+          barrierDismissible: false,
+          child: AlertDialog(
+            title: Text('Error!'),
+            content: Text(response.error.message),
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () {
+                  _navigationService.back();
+                },
+                child: Text('cancel'),
+              ),
+            ],
+          ));
       notifyListeners();
     } else if (response.success != null && response.error != null) {
-      _hasError = true;
-      _err = response.error.message;
-      _currentWeatherModel = response.success;
+      await showDialog(
+          context: context,
+          barrierDismissible: false,
+          child: AlertDialog(
+            title: Text('Error!'),
+            content: Text(response.error.message),
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () {
+                  _navigationService.back();
+                },
+                child: Text('cancel'),
+              ),
+            ],
+          ));
       notifyListeners();
     } else {
-      _hasError = false;
-      _currentWeatherModel = response.success;
+      await showDialog(
+        context: context,
+        barrierDismissible: false,
+        child: Dialog(
+          elevation: 0.0,
+          backgroundColor: Colors.transparent,
+          child: ResultModalView(
+            scaledHeight: scaledHeight,
+            scaledWidth: scaledWidth,
+            textSize: textSize,
+            currentWeatherModel: response.success,
+            onPress: () {
+              _navigationService.back();
+            },
+          ),
+        ),
+      );
       notifyListeners();
     }
+    notifyListeners();
     return response;
   }
 }

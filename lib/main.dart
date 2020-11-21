@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 import 'features/wrapper/view/wrapper_view.dart';
 import 'locator.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: WrapperView(),
+      navigatorKey: locator<NavigationService>().navigatorKey,
     );
   }
 }

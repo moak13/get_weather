@@ -60,7 +60,13 @@ class CurrentWeatherView extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  model.futureToRun(model.ctrlCityName.text.trim());
+                  model.futureToRun(
+                    context,
+                    model.ctrlCityName.text.trim(),
+                    scaleHeight,
+                    scaleWidth,
+                    textScale,
+                  );
                 },
                 child: Container(
                   height: scaleHeight * 7,

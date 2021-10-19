@@ -4,9 +4,9 @@ import 'package:equatable/equatable.dart';
 import 'package:get_weather/core/utils/value_converter.dart';
 
 class MainWeatherModel extends Equatable {
-  final double temp;
-  final int pressure;
-  final int humidity;
+  final num temp;
+  final num pressure;
+  final num humidity;
   MainWeatherModel({
     this.temp,
     this.pressure,

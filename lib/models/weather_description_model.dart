@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class WeatherDescriptionModel extends Equatable {
-  final int id;
+  final num id;
   final String main;
   final String description;
   WeatherDescriptionModel({

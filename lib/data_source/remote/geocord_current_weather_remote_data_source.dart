@@ -17,8 +17,6 @@ class GeoCordCurrentWeatherRemoteDataSourceImpl
   Future<CurrentWeatherModel> fetchCurrentWeather() async {
     final UserCurrentPosition _userLocation =
         await _location.getUserCurrentLocation();
-    print('lon: ' + _userLocation.longitude.toString());
-    print('lat: ' + _userLocation.latitude.toString());
     final String url = StringConstant.base_url +
         'weather?lat=${_userLocation.latitude}&lon=${_userLocation.longitude}&appid=${StringConstant.app_id}';
     final response = await _networkHandler.getOneCallWeather(url);

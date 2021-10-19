@@ -60,13 +60,15 @@ class CurrentWeatherView extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  model.futureToRun(
-                    context,
-                    model.ctrlCityName.text.trim(),
-                    scaleHeight,
-                    scaleWidth,
-                    textScale,
-                  );
+                  model
+                      .futureToRun(
+                        context,
+                        model.ctrlCityName.text.trim(),
+                        scaleHeight,
+                        scaleWidth,
+                        textScale,
+                      )
+                      .whenComplete(() => model.ctrlCityName.clear());
                 },
                 child: Container(
                   height: scaleHeight * 7,
@@ -83,7 +85,12 @@ class CurrentWeatherView extends StatelessWidget {
                             backgroundColor: Colors.white,
                             strokeWidth: 2,
                           )
-                        : Text('Submit'),
+                        : Text(
+                            'Submit',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
                   ),
                 ),
               )

@@ -35,7 +35,7 @@ class ReadingsWidget extends StatelessWidget {
           Text(
             value,
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.blue,
               fontSize: textSize * 12,
               fontWeight: FontWeight.w400,
             ),

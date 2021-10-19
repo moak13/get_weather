@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class WindWeatherModel extends Equatable {
-  final double speed;
+  final num speed;
   WindWeatherModel({
     this.speed,
   });

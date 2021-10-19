@@ -5,7 +5,9 @@ import '../../../view_models/geocord_current_weather_view_model.dart';
 import '../widget/readings_widget.dart';
 
 class GeoCordCurrentWeatherView extends StatelessWidget {
-  const GeoCordCurrentWeatherView({Key key}) : super(key: key);
+  const GeoCordCurrentWeatherView({
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

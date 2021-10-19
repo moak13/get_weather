@@ -6,6 +6,7 @@ import '../../geocord_current_weather/view/geocord_current_weather_view.dart';
 
 class GetIndexView extends StatelessWidget {
   final int index;
+
   const GetIndexView({
     Key key,
     this.index,

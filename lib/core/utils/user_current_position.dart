@@ -15,10 +15,9 @@ class UserCurrentPosition {
 
       UserCurrentPosition userPosition = UserCurrentPosition(
           latitude: position.latitude, longitude: position.longitude);
-      print(userPosition.latitude);
-      print(userPosition.longitude);
       return userPosition;
     } catch (e) {
+      print(e);
       return e.toString();
     }
   }

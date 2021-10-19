@@ -10,7 +10,7 @@ class CurrentWeatherModel extends Equatable {
   final List<WeatherDescriptionModel> weather;
   final MainWeatherModel main;
   final WindWeatherModel wind;
-  final int id;
+  final num id;
   final String name;
   CurrentWeatherModel({
     this.weather,

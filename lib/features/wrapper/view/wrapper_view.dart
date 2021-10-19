@@ -5,7 +5,9 @@ import '../../../view_models/wrapper_view_model.dart';
 import '../widget/get_index_view.dart';
 
 class WrapperView extends StatelessWidget {
-  const WrapperView({Key key}) : super(key: key);
+  const WrapperView({
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +25,15 @@ class WrapperView extends StatelessWidget {
             items: [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
-                title: Text('Home'),
+                label: 'Home',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.assessment),
-                title: Text('Forecast'),
+                label: 'Forecast',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.search),
-                title: Text('Search'),
+                label: 'Search',
               ),
             ]),
       ),

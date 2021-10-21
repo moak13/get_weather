@@ -32,7 +32,7 @@ class CurrentWeatherViewModel extends BaseViewModel {
       await showDialog(
           context: context,
           barrierDismissible: false,
-          child: AlertDialog(
+          builder: (BuildContext context) => AlertDialog(
             title: Text('Error!'),
             content: Text(response.error.message),
             actions: <Widget>[
@@ -49,7 +49,7 @@ class CurrentWeatherViewModel extends BaseViewModel {
       await showDialog(
           context: context,
           barrierDismissible: false,
-          child: AlertDialog(
+          builder: (BuildContext context) => AlertDialog(
             title: Text('Error!'),
             content: Text(response.error.message),
             actions: <Widget>[
@@ -66,7 +66,7 @@ class CurrentWeatherViewModel extends BaseViewModel {
       await showDialog(
         context: context,
         barrierDismissible: false,
-        child: Dialog(
+        builder: (BuildContext context) => Dialog(
           elevation: 0.0,
           backgroundColor: Colors.transparent,
           child: ResultModalView(

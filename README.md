@@ -1,6 +1,11 @@
 # Get Weather
   ## Overview 
-  This is the **Get Weather** Android app project repository, written with pure [Flutter](https://flutter.dev/).
+  This is the **Get Weather** Android app project repository, written with pure [Flutter](https://flutter.dev/). This Project uses the Flutter Version 1.22.6. To contribute to this project, you need to set FVM on your machine. 
+  **For packages use the one that best suit the SDK version of the project to avoid errors**
+
+  ## Below is the guide for setting up FVM 
+  * FVM is a CLI tool used for managing different flutter SDK versions. This is the **https://fvm.app/** link to download.
+  * Once you click on the link, it redirects you to the fvm site, click on get started and follow the procedure. 
   
   
   ## Project Description
@@ -8,7 +13,8 @@
 
   ## List of Todos:
   * Forecast feature
-  * Light and dark mode
+  * Light and dark mode (use stacked_themes package for this)
+    **This is the https://pub.dev/packages/stacked_themes link to the package**
   * Weather image
   * Change temperature between F and C
   * Settings tab (should include 2 and 4 options in it)
